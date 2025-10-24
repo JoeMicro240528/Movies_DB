@@ -2,7 +2,33 @@ import Footer from "@/components/Footer"
 import SectionHeding from '../components/ui/SectionHeding'
 import { Search } from "lucide-react"
 import MoveCard from "@/components/ui/MoveCard"
+type Movie = {
+  id: number | string
+  title: string
+  poster: string
+  rating: number
+} & Record<string, unknown>
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+// @ts-ignore: allow importing JS module without a declaration file
+import {getTrendingMovies} from '../store/movieSlice'
+type RootState = {
+  movie: {
+    TrendingMovies: Movie[],
+    FavoriteMovies: Movie[]
+  }
+}
+
 const Landing = () => {
+  const { TrendingMovies,FavoriteMovies } = useSelector((state: RootState) => state.movie)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getTrendingMovies())
+  }, [dispatch])
+
+
+    
   return (
     <div>
          <main>
@@ -27,24 +53,23 @@ const Landing = () => {
 
              <div className="trending-section my-10">
              <div className="my-10">
-                  <SectionHeding >
-                  Tranding Movies
-               </SectionHeding>
+                  <SectionHeding>
+                  Trending Movies
+                  </SectionHeding>
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-1 mt-4 mx-20">
+                       {
+                        TrendingMovies.length!=0? 
+                           TrendingMovies.map((movie: Movie) => (
+                             <MoveCard key={movie.id} movie={movie} />
+                       ))
+                        :<h1 className="font-bold text-white text-2xl text-center my-7">NO Movies Yet...</h1>
+                       }
+                  </div>
              </div>
-                <div className="trending-movies grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10 mx-20">
-                    <MoveCard />
-                             <MoveCard />
-                             <MoveCard />
-                             <MoveCard />
-                             <MoveCard />
-                             <MoveCard />
-                             <MoveCard />
-                    </div>
-                </div>
+             </div>
          </main>
          <Footer />
     </div>
   )
 }
-
 export default Landing
