@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 const initialState = {
     movies: [],
+    searchMovies:[],
     loading: false,
     movie:[],
     currentPage: 1,
@@ -55,7 +56,10 @@ export const getMovie = createAsyncThunk(
           `https://api.themoviedb.org/3/movie/${movieId}?api_key=653a7429e9a4c56b67161a433c050289`
         );
         const data = await response.json();
+          console.log(data);
         return data;
+      
+        
     }
     catch (error) {
       return rejectWithValue((error).message);
@@ -113,10 +117,10 @@ export const movieSlice = createSlice({
            });
 
            //get single movie 
-           builder.addCase(getMovie.fulfilled), (state, action) => {
+           builder.addCase(getMovie.fulfilled, (state, action) => {
                state.movie = action.payload;
                state.loading = false;
-           };
+           });
            builder.addCase(getMovie.pending, (state) => {
                state.loading = true;
            });
@@ -144,12 +148,11 @@ export const movieSlice = createSlice({
            // search movie
 
             builder.addCase(searchMovie.fulfilled, (state, action) => {
-                state.movies = action.payload;
+                state.searchMovies = action.payload;
                 state.loading = false;
             }); 
             builder.addCase(searchMovie.pending, (state, action) => {
-                state.loading = action.payload;
-                state.loading = false;
+                state.loading = true;
             }); 
             builder.addCase(searchMovie.rejected, (state, action) => {
                  state.error = action.payload;

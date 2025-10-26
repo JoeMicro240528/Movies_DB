@@ -14,6 +14,7 @@ import {  nextPage} from "../store/movieSlice";
 import {  previousPage} from "../store/movieSlice";
 // @ts-ignore: allow importing JS module without a declaration file
 import PaginationComponent  from "../components/Pagination"
+import { SpinnerColor } from "@/components/Spinner"
 type Movie = {
   id: number | string
   title: string
@@ -31,7 +32,7 @@ type RootState = {
 
 const SearchPage = () => {
   const dispatch = useDispatch();
-    const { movies,currentPage , total_pages} = useSelector((state: RootState) => state.movie)
+    const { movies,currentPage ,searchMovies , total_pages} = useSelector((state: RootState) => state.movie)
     const [word,setWord] = useState('')
 
     useEffect( ()=>{
@@ -59,21 +60,21 @@ const SearchPage = () => {
        </div>
         <div className="mt-6 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10 mx-20">
                              {
+                               word?
+                                searchMovies.length!=0? 
+                                searchMovies.map((movie: Movie) => (
+                              <MoveCard key={movie.id} movie={movie} />
+                        ))
+                          :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>
+                          :      
                             movies.length!=0? 
                             movies.map((movie: Movie) => (
                               <MoveCard key={movie.id} movie={movie} />
                         ))
-                          :<h1 className="font-bold text-white text-2xl text-center my-7">NO Movies Yet...</h1>
+                          :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>
                        }
                     </div>
-                    <div className="pagination flex justify-center items-center my-10">
-                        {/* <button  onClick={()=> dispatch(nextPage())}   className="bg-[#127bb0] text-white px-4 py-2 cursor-pointer rounded-lg  hover:bg-[#0f5a8c] transition-all duration-300  mx-2">Previous</button>
-                          <div className="flex items-center">
-                              <span className="text-white mx-2">Page {currentPage} of {total_pages}</span>
-                          </div>
-                        <button onClick={()=> dispatch(previousPage())} className="bg-[#127bb0] text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-[#0f5a8c] transition-all duration-300 mx-2">Next</button>
-                         */}
-
+                    <div className="pagination  flex justify-center items-center my-10">
                          <PaginationComponent getPage={getAllMovies} pageCount={ total_pages} />
                     </div>
                     <Footer2/>

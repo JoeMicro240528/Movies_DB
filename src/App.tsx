@@ -13,7 +13,7 @@ function App() {
               <Route  index element={<Landing />} />
               <Route path="search" element={<SearchPage />} />
               <Route path="favorites" element={<FavoritePage />} />
-              <Route path="details/:id" element={<Details />} />
+              <Route path="movie/:id" element={<Details />} />
            </Routes>
     </div>
   )

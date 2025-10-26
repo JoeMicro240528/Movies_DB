@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 // @ts-ignore: allow importing JS module without a declaration file
 import {getTrendingMovies} from '../store/movieSlice'
+import { SpinnerColor } from "@/components/Spinner"
 type RootState = {
   movie: {
     TrendingMovies: Movie[],
@@ -62,7 +63,7 @@ const Landing = () => {
                            TrendingMovies.map((movie: Movie) => (
                              <MoveCard key={movie.id} movie={movie} />
                        ))
-                        :<h1 className="font-bold text-white text-2xl text-center my-7">NO Movies Yet...</h1>
+                        :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>
                        }
                   </div>
              </div>
