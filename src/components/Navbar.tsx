@@ -5,8 +5,9 @@ import { useState } from 'react';
 import { NavLink } from 'react-router';
 import logo from "../../public/logo.svg"
 const Navbar = () => {
+
      const [mnueTogile, setMenuToggle] = useState(false);
-        const [searchVisible, setSearchVisible] = useState(false);
+     
     const setToggel = ()=>{
         setMenuToggle(!mnueTogile);
     }
