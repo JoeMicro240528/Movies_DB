@@ -27,11 +27,11 @@ const FavoritePage = () => {
                <p className="text-[#9FA4A7] text-md md:text-xl mb-20 mt-3 mx-20">  Your curated collection of must-watch movies.  </p>
     
        </div>
-        <div className="mt-6 grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] md:grid-cols-4  gap-10 mx-20">
+        <div className="mt-6 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:grid-cols-4  gap-10 mx-20">
           {
           FavoriteMovies.length > 0 ? FavoriteMovies.map((movie) => (
             <MoveCard key={movie.id} movie={movie} />
-          )) : <p className="text-center text-2xl font-bold text-white">No Favorite Movies Found</p>
+          )) : <p className="text-center text-2xl font-bold mx-0 md:mx-[400px]  w-[100%] text-white">No Favorite Movies Found</p>
           }
         </div>
 

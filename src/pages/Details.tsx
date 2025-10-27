@@ -11,16 +11,18 @@ import { useEffect } from "react"
 import {getMovie} from '../store/movieSlice'
 // @ts-ignore: allow importing JS module without a declaration file
 import { addToFavoriteMovies } from "@/store/movieSlice";
+
 const Details = () => {
+
+
    const dispatch = useDispatch();
    const { id } = useParams();
-  const { movie ,FavoriteMovies } = useSelector((state: RootState) => state.movie)
+  const { movie} = useSelector((state: RootState) => state.movie)
    useEffect(() => {
        dispatch(getMovie(id));
        console.log(movie)
    }, [id])
-    // Fetch movie details using the id from params
-  console.log(movie)
+
   return (
     <div className="overflow-x-hidden">
          <div className="relative movie-details overflow-hidden z-6 lg:flex  gap-4 w-full h-[90vh] min-h-[400px] p-5 lg:p-20 bg-no-repeat bg-center bg-cover"
@@ -36,8 +38,7 @@ const Details = () => {
                             <h1 className="title text-6xl mb-5 font-bold text-white ">{movie.title}</h1>
                             <div className="flex gap-4 items-center">
                                 <button onClick={()=> dispatch(addToFavoriteMovies(movie))} className=" bg-red-700 p-3 text-white flex gap-2 rounded-md cursor-pointer font-bold  opacity-100 hover:opacity-90 transition-all"> <Heart/> Add to Favorites</button>
-                                <button className=" bg-[#363E4B] p-3 text-white flex gap-2 rounded-md cursor-pointer font-bold opacity-80 hover:opacity-100 transition-all"><Play/> Watch Trailer</button>
-
+                                <button className=" bg-[#363E4B] p-3 text-white flex gap-2 rounded-md cursor-pointer font-bold opacity-80 hover:opacity-100 transition-all"><Play/><a href={`movie.${movie.homepage}`} target="blank">Watch Movie</a></button>
                             </div>
                     </div>
                 </div>

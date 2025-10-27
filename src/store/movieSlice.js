@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 const initialState = {
     movies: [],
-    searchMovies:[],
     loading: false,
     movie:[],
     currentPage: 1,
     total_pages: 0,
     error: null,
+    searchMovies:[],
     FavoriteMovies: [],
     TrendingMovies: [],
     
@@ -28,6 +28,8 @@ export const getAllMovies = createAsyncThunk(
     }
   }
 );
+
+ 
 
 // tranding movies
 export const getTrendingMovies = createAsyncThunk(
@@ -90,8 +92,13 @@ export const movieSlice = createSlice({
   initialState,
   reducers: {
     addToFavoriteMovies: (state, action) => {
+  
+      const exists = state.FavoriteMovies.find(movie => movie.id === action.payload.id);
+      if (!exists) {
         state.FavoriteMovies.push(action.payload);
-    },
+      }
+},
+
 
      nextPage:(state, action) => {
         state.currentPage = state.currentPage + 1;
@@ -158,6 +165,7 @@ export const movieSlice = createSlice({
                  state.error = action.payload;
                 state.loading = false;
             }); 
+
 
             
 

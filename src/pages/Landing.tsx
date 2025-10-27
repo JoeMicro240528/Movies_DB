@@ -9,25 +9,35 @@ type Movie = {
   rating: number
 } & Record<string, unknown>
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 // @ts-ignore: allow importing JS module without a declaration file
 import {getTrendingMovies} from '../store/movieSlice'
+// @ts-ignore: allow importing JS module without a declaration file
+import {searchMovie} from '../store/movieSlice'
 import { SpinnerColor } from "@/components/Spinner"
+import { Link } from "react-router"
 type RootState = {
   movie: {
     TrendingMovies: Movie[],
-    FavoriteMovies: Movie[]
+    searchMovies: Movie[]
   }
 }
 
 const Landing = () => {
-  const { TrendingMovies,FavoriteMovies } = useSelector((state: RootState) => state.movie)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getTrendingMovies())
-  }, [dispatch])
-
+    const { TrendingMovies,searchMovies } = useSelector((state: RootState) => state.movie)
+    const [word,setWord] = useState('')
+  
+    const dispatch = useDispatch()
+     
+      useEffect( ()=>{
+             if(word!==''){
+                dispatch(searchMovie(word))
+             } else{
+                 dispatch((getTrendingMovies()));
+                 
+             }
+        }
+      ,[dispatch,word])
 
     
   return (
@@ -42,14 +52,14 @@ const Landing = () => {
                             Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while on a warpath of revenge against the conspirators who destroyed his family.
                         </p>
                         <div>
-                            <button className=" z-20 relative mt-10 bg-[#127bb0] hover:opacity-80  cursor-pointer transition-all text-white font-bold py-3 px-6 rounded-lg ">Get Started</button>   
+                            <Link to={'search'} className=" z-20 relative mt-10 bg-[#127bb0] hover:opacity-80  cursor-pointer transition-all text-white font-bold py-3 px-6 rounded-lg ">Get Started</Link>   
                         <button className=" z-20 relative mt-10 bg-transparent border border-white hover:opacity-70 transition-all  cursor-pointer text-white font-bold py-3 px-6 rounded-lg  ml-5">Learn More</button> 
                         </div>
                  </div>
              </div>
              <div style={{backgroundColor:'#233c48',color:'#92b7c1'}} className="search-field focus-within:outline-2 px-20 my-10 flex justify-stretch outline-0 items-center gap-3 mx-15 md:mx-20 rounded-lg py-2">
                 <Search size={30} className="text-[#92b7c1]" />
-                <input type="text" placeholder="Search for movies,tv show and person..." className="border-0  border-gray-300 outline-0 rounded-lg py-2 px-4 w-[100%] md:text-2xl  " />
+                <input type="text" value={word} onChange={(e) => setWord(e.target.value)} placeholder="Search for Trending movies..." className="border-0  border-gray-300 outline-0 rounded-lg py-2 px-4 w-[100%] md:text-2xl  " />
              </div>
 
              <div className="trending-section my-10">
@@ -58,12 +68,19 @@ const Landing = () => {
                   Trending Movies
                   </SectionHeding>
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-1 mt-4 mx-20">
-                       {
-                        TrendingMovies.length!=0? 
-                           TrendingMovies.map((movie: Movie) => (
-                             <MoveCard key={movie.id} movie={movie} />
-                       ))
-                        :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>
+                        {
+                               word?
+                                searchMovies.length!=0? 
+                                searchMovies.map((movie: Movie) => (
+                              <MoveCard key={movie.id} movie={movie} />
+                        ))
+                          :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>
+                          :      
+                            TrendingMovies.length!=0? 
+                            TrendingMovies.map((movie: Movie) => (
+                              <MoveCard key={movie.id} movie={movie} />
+                        ))
+                          :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>
                        }
                   </div>
              </div>

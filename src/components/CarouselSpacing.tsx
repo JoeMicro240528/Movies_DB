@@ -21,49 +21,49 @@ const castList: castListType = [
     id:1,
     name: "Leonardo DiCaprio",
     role: "Jack Dawson",
-    image: "https://image.tmdb.org/t/p/w500/jBklt2Uwq9u4Y1AoB4O2zxIp4kC.jpg"
+    image: "https://i.pinimg.com/736x/5e/d1/0c/5ed10c563ecb3416c3fc579452686329.jpg"
   },
   {
     id:2,
     name: "Kate Winslet",
     role: "Rose DeWitt Bukater",
-    image: "https://image.tmdb.org/t/p/w500/4cb9hWVCSiuSmexYJ38gPqZ9J0Y.jpg"
+    image: "https://i.pinimg.com/736x/a6/7c/8d/a67c8d532fd85caa3efd13f98b736471.jpg"
   },
   {
     id:3,
     name: "Billy Zane",
     role: "Caledon ‘Cal’ Hockley",
-    image: "https://image.tmdb.org/t/p/w500/5n4q0rKAUEuPGgU4ZKgciqUDK4l.jpg"
+    image: "https://i.pinimg.com/1200x/6f/a4/55/6fa455669d8d9a009c619d2e5732b5e7.jpg"
   },
   {
     id:4,
     name: "Kathy Bates",
     role: "Molly Brown",
-    image: "https://image.tmdb.org/t/p/w500/9o9YrR9Yb1E1oiZp9qKU2uRSv2u.jpg"
+    image: "https://i.pinimg.com/1200x/22/3e/be/223ebe900de52ac72a6f4683a620c489.jpg"
   },
   {
     id:5,
     name: "Frances Fisher",
     role: "Ruth DeWitt Bukater",
-    image: "https://image.tmdb.org/t/p/w500/bzIgE64AMQtZfBiYzCU1c1rFhAT.jpg"
+    image: "https://i.pinimg.com/736x/5f/1d/91/5f1d91b13b0fc1423fa7abe62baf488e.jpg"
   },
   {
     id:6,
     name: "Gloria Stuart",
     role: "Old Rose (Rose Dawson Calvert)",
-    image: "https://image.tmdb.org/t/p/w500/gAGalv1HBuYtYOWcK2bwl9A12Gh.jpg"
+    image: "https://i.pinimg.com/1200x/ab/1b/ad/ab1bad6eeaa2e52fd7997ad6b2dfdd98.jpg"
   },
   {
     id:7,
     name: "Bill Paxton",
     role: "Brock Lovett",
-    image: "https://image.tmdb.org/t/p/w500/4e9tAy0GJ1gK4pZs1nbDOI61oKS.jpg"
+    image: "https://i.pinimg.com/736x/30/16/2b/30162b0b92fcaa48184f17241be16fa8.jpg"
   },
   {
     id:8,
     name: "Bernard Hill",
     role: "Captain Edward J. Smith",
-    image: "https://image.tmdb.org/t/p/w500/kt9MaELJdBaPSpGfXpGtFmO3zrk.jpg"
+    image: "https://i.pinimg.com/1200x/15/4d/f6/154df6c62a367bbe9de4e5f3a0edcaab.jpg"
   }
 ];
 
