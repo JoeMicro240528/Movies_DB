@@ -2,12 +2,6 @@ import Footer from "@/components/Footer"
 import SectionHeding from '../components/ui/SectionHeding'
 import { Search } from "lucide-react"
 import MoveCard from "@/components/ui/MoveCard"
-type Movie = {
-  id: number | string
-  title: string
-  poster: string
-  rating: number
-} & Record<string, unknown>
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 // @ts-ignore: allow importing JS module without a declaration file
@@ -16,15 +10,8 @@ import {getTrendingMovies} from '../store/movieSlice'
 import {searchMovie} from '../store/movieSlice'
 import { SpinnerColor } from "@/components/Spinner"
 import { Link } from "react-router"
-type RootState = {
-  movie: {
-    TrendingMovies: Movie[],
-    searchMovies: Movie[]
-  }
-}
-
 const Landing = () => {
-    const { TrendingMovies,searchMovies } = useSelector((state: RootState) => state.movie)
+    const { TrendingMovies,searchMovies } = useSelector((state) => state.movie)
     const [word,setWord] = useState('')
   
     const dispatch = useDispatch()
@@ -71,13 +58,13 @@ const Landing = () => {
                         {
                                word?
                                 searchMovies.length!=0? 
-                                searchMovies.map((movie: Movie) => (
+                                searchMovies.map((movie) => (
                               <MoveCard key={movie.id} movie={movie} />
                         ))
                           :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>
                           :      
                             TrendingMovies.length!=0? 
-                            TrendingMovies.map((movie: Movie) => (
+                            TrendingMovies.map((movie) => (
                               <MoveCard key={movie.id} movie={movie} />
                         ))
                           :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>

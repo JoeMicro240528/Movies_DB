@@ -9,30 +9,13 @@ import {searchMovie} from '../store/movieSlice'
 // @ts-ignore: allow importing JS module without a declaration file
 import {getAllMovies} from '../store/movieSlice'
 // @ts-ignore: allow importing JS module without a declaration file
-import {  nextPage} from "../store/movieSlice";
-// @ts-ignore: allow importing JS module without a declaration file
-import {  previousPage} from "../store/movieSlice";
-// @ts-ignore: allow importing JS module without a declaration file
 import PaginationComponent  from "../components/Pagination"
 import { SpinnerColor } from "@/components/Spinner"
-type Movie = {
-  id: number | string
-  title: string
-  poster: string
-  rating: number
-} & Record<string, unknown>
 
-type RootState = {
-  movie: {
-    movies: Movie[],
-    // curu: Movie[],
-    // movies: Movie[],
-  }
-}
 
 const SearchPage = () => {
   const dispatch = useDispatch();
-    const { movies,currentPage ,searchMovies , total_pages} = useSelector((state: RootState) => state.movie)
+    const { movies,currentPage ,searchMovies , total_pages} = useSelector((state) => state.movie)
     const [word,setWord] = useState('')
 
     useEffect( ()=>{
@@ -62,13 +45,13 @@ const SearchPage = () => {
                              {
                                word?
                                 searchMovies.length!=0? 
-                                searchMovies.map((movie: Movie) => (
+                                searchMovies.map((movie) => (
                               <MoveCard key={movie.id} movie={movie} />
                         ))
                           :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>
                           :      
                             movies.length!=0? 
-                            movies.map((movie: Movie) => (
+                            movies.map((movie) => (
                               <MoveCard key={movie.id} movie={movie} />
                         ))
                           :<h1 className="font-bold text-white text-2xl text-center my-7"><SpinnerColor /></h1>

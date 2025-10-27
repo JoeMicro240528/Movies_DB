@@ -3,10 +3,12 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from "react-router"
 import { Provider } from 'react-redux';
 import './index.css'
-import App from './App.tsx'
+import App from './App.jsx'
 // @ts-ignore: missing type declarations for ./store
-import {Store} from './store'
-createRoot(document.getElementById('root')!).render(
+import {Store} from './store/index.js'
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <StrictMode>
   <BrowserRouter>
      <Provider store={Store}>
@@ -15,3 +17,7 @@ createRoot(document.getElementById('root')!).render(
   </BrowserRouter>,
   </StrictMode>,
 )
+
+
+
+

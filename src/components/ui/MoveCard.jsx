@@ -3,27 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 // @ts-ignore: allow importing JS module without a declaration file
 import { addToFavoriteMovies } from "@/store/movieSlice";
-type Movie = {
-poster_path: any;
-  title: string;
-   id: number | string;
-  poster: string;
-  vote_average: number;
-};
-type Props = {
-  movie: Movie;
-};
 
-type RootState = {
-  movie: {
-    TrendingMovies: Movie[],
-    FavoriteMovies: Movie[]
-  }
-}
-
-const MoveCard = ({ movie }: Props) => {
+const MoveCard = ({ movie }) => {
   const navigate = useNavigate();
-  const { TrendingMovies,FavoriteMovies } = useSelector((state: RootState) => state.movie)
+
   const dispatch = useDispatch()
   return (
     <div style={{backgroundImage:`url(https://image.tmdb.org/t/p/w500/${movie.poster_path})`}}

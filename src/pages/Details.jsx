@@ -12,16 +12,17 @@ import {getMovie} from '../store/movieSlice'
 // @ts-ignore: allow importing JS module without a declaration file
 import { addToFavoriteMovies } from "@/store/movieSlice";
 
+
 const Details = () => {
 
 
    const dispatch = useDispatch();
    const { id } = useParams();
-  const { movie} = useSelector((state: RootState) => state.movie)
+  const { movie} = useSelector((state) => state.movie)
    useEffect(() => {
        dispatch(getMovie(id));
-       console.log(movie)
-   }, [id])
+
+   }, [id,dispatch])
 
   return (
     <div className="overflow-x-hidden">
@@ -80,7 +81,7 @@ const Details = () => {
                   <span className="text-gray-400 text-sm font-normal">Genre</span>
                    <ul className="flex justify-around gap-2.5 ">
                        {
-                        movie.genres && movie.genres.map((genr:any) =>(
+                        movie.genres && movie.genres.map((genr) =>(
                             <li key={genr.id} className="text-white/80  p-1 px-2 rounded-3xl cursor-pointer  text-[12px] bg-gray-600">{genr.name}</li>
                         ))
                        }
